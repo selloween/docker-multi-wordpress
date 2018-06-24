@@ -1,14 +1,18 @@
-# A simple WordPress Docker Compose & Composer Boilerplate
+# A simple Docker Compose Setup for WordPress Development including Composer
 
 This setup is focused on WordPress development using Docker on Linux, but should work fine on MacOS or Windows.
 
 ## Preface
 
+### File Permissions on Linux 
+
 Docker containers run as the root user on Linux hosts. For that reason volume and bind mounts are created as root and are not writeable by the local user. This can be very frustrating when developing localy and needing to have access to the WordPress theme and plugin directories.
 
-This setup let's you focus on developing your WordPress Theme and/or Plugin without the headaches of changing file permissions, ownerships and UIDs.
+This setup let's you focus on developing your WordPress Theme and/or Plugin without the headaches of changing file permissions, ownerships and UIDs/GIDs.
 
-The only requirement for this setup is Docker and Docker Compose installed on your system.
+### Requirements
+
+The only requirement is running Docker and Docker Compose on your system.
 This configuration was sucessfully tested using ``Docker version 18.05.0-ce`` and ``docker-compose version 1.21.2``
 
 ## Project Structure
