@@ -8,6 +8,9 @@ Docker containers run as the root user on Linux hosts. For that reason volume an
 
 This setup let's you focus on developing your WordPress Theme and/or Plugin without the headaches of changing file permissions, ownerships and UIDs.
 
+The only requirement for this setup is Docker and Docker Compose installed on your system.
+This configuration was sucessfully tested using ``Docker version 18.05.0-ce`` and ``docker-compose version 1.21.2``
+
 ## Project Structure
 
 ```
@@ -31,9 +34,9 @@ docker-compose.yml
 ## Environment variables
 
 Change the enviroment variabels in the .env file to suit your project.
-
+See an example below:
 ```
-COMPOSE_PROJECT_NAME=wp-project
+COMPOSE_PROJECT_NAME=my-awesome-project
 DB_NAME=wp-database
 DB_USER=wp-user
 DB_PASSWORD=db-password
@@ -42,18 +45,20 @@ WP_TABLE_PREFIX=wp_
 DB_CONTAINER=db-container
 WP_CONTAINER=wp-container
 COMPOSER_CONTAINER=composer-container
+THEME_NAME=my-awesome-theme
+PLUGIN_NAME=my-awesome-plguin
 ```
 
 ## Composer
 
-Add plugins and/or theme dependencies in the composer.json file.
-They will be installed by the composer container on "docker-compose up --build"
+Add plugins and/or theme dependencies in the ``config/composer/composer.json`` file.
+They will be installed by the composer container on ``docker-compose up --build``
 
-I've added "YOAST" and WP Supercache" plugins using the WordPress Packagist repository as example. You can find more plugins here: https://wpackagist.org/
+I've added some common plugins and the "WordPress Packagist" repository as an example. You can find more plugins here: https://wpackagist.org/
 
 ## Theme/Plugin location
 
-Place your theme/plugin files in the theme/plugin folder. The corresponding theme/plugin folder in the container will be renamed to the name you specified in the .env file.
+Place your theme/plugin files in the theme/plugin folder. The corresponding theme/plugin folder in the container will be renamed to the name you specified in ``.env`` file.
 
 ## Additonal configuration
 
