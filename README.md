@@ -55,10 +55,26 @@ PLUGIN_NAME=my-awesome-plguin
 
 ## Composer
 
-Add plugins and/or theme dependencies in the ``config/composer/composer.json`` file.
+Add plugins and/or theme dependencies to ``config/composer/composer.json``
 They will be installed by the composer container on ``docker-compose up --build``
+I've added common plugins from https://wpackagist.org/ repository as an example.
 
-I've added some common plugins and the "WordPress Packagist" repository as an example. You can find more plugins here: https://wpackagist.org/
+```
+{
+    "name": "wordpress-docker-composer",
+    "description": "WordPress Docker & Composer Setup",
+    "repositories":[
+        {
+            "type":"composer",
+            "url":"https://wpackagist.org"
+        }
+    ],
+    "require": {
+        "wpackagist-plugin/wordpress-seo":"*",
+        "wpackagist-plugin/wp-super-cache":"*"
+    }
+}
+```
 
 ## Theme/Plugin location
 
