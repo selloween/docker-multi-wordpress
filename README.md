@@ -8,7 +8,7 @@ This setup is focused on WordPress development using Docker on Linux, but should
 
 Docker containers run as the root user on Linux hosts. For that reason volume and bind mounts are created as root and are not writeable by the local user. This can be very frustrating when developing localy and needing to have access to the WordPress theme and plugin directories.
 
-This setup let's you focus on developing your WordPress Theme and/or Plugin without the headaches of changing file permissions, ownerships and UIDs/GIDs by avoding volume bind mounts of default directories - e.g. ``wp-content`` (Information on using bind mounts: https://docs.docker.com/storage/bind-mounts/)
+This setup let's you focus on developing your WordPress Theme and/or Plugin without the headaches of changing file permissions, ownerships and UIDs/GIDs by avoding volume bind mounts of default directories - e.g. ``wp-content``and therefore getting permission conflicts out of the way. (Information on using bind mounts: https://docs.docker.com/storage/bind-mounts/)
 
 ### Requirements
 
