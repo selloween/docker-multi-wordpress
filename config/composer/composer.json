@@ -1,0 +1,14 @@
+{
+    "name": "wordpress-docker-composer",
+    "description": "WordPress Docker & Composer Setup",
+    "repositories":[
+        {
+            "type":"composer",
+            "url":"https://wpackagist.org"
+        }
+    ],
+    "require": {
+        "wpackagist-plugin/wordpress-seo":"*",
+        "wpackagist-plugin/wp-super-cache":"*"
+    }
+}
