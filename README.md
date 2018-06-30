@@ -9,22 +9,11 @@ This setup is focused on WordPress development using Docker on Linux, but should
 * Docker
 * Docker Compose
 
-Tested using ``Docker version 18.05.0-ce`` and ``docker-compose version 1.21.2``
-
 ### Docker Containers used
 
 * MariaDB https://hub.docker.com/_/mariadb/
 * Wordpress https://hub.docker.com/_/wordpress/
 * Composer https://hub.docker.com/_/composer/
-
-### File Permissions on Linux 
-
-Docker containers run as the root user on Linux hosts. For that reason volume and bind mounts are created as root and are not writeable by the local user. This can be very frustrating when developing localy and needing to have access to the WordPress theme and plugin directories.
-
-This setup let's you focus on developing your WordPress Theme and/or Plugin without the headaches of changing file permissions, ownerships and UIDs/GIDs by avoding volume bind mounts of default directories - e.g. ``wp-content``and therefore getting permission conflicts out of the way.
-(Information on using bind mounts: https://docs.docker.com/storage/bind-mounts/)
-
-
 
 ## Project Structure
 
@@ -48,7 +37,7 @@ docker-compose.yml
 
 ## Environment variables
 
-Change the enviroment variabels in the .env file to suit your project.
+Change the enviroment variables in the .env file to suit your project.
 See an example below:
 ```
 COMPOSE_PROJECT_NAME=my-awesome-project
@@ -96,22 +85,20 @@ Place your theme/plugin files in the theme/plugin folder. The corresponding them
 ### Custom wp-config.php
 
 You can add customizations to ``./config/wordpress/wp-config.php``.
-Note: You don't have to add database credentials as this is done by Docker automatically!
+Note: You don't have to add database credentials as this is done by the WordPress Docker image automatically!
 
-Note: You have to run ``docker-compose up`` adding the ``--build`` flag to make configuration changes take effect.
+Note: You have to run ``docker-compose up`` adding the ``--build`` flag to make wp-config changes take effect.
 
 ## Persistent Data
 
-volumes are located under the default location 
+volumes are located on Linux hosts under the default location 
 ``/var/lib/docker/volumes``
 
 ``wp_content`` contains all files from ``wp-content``
 including uploads etc.
 
-``db_data`` contains database data, so that data won't get lost if the containers get removed.
+``db_data`` contains database data, so that data won't get lost if the database container gets removed.
 
 ## Run Project
 
 ``docker-compose up --build``
-
-Note: You only need to add the ``--build`` flag when running ``docker-compose up`` the first time or if you added changes to configuration files e.g. ``composer.json``
