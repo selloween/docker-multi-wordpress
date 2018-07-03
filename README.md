@@ -9,7 +9,7 @@ This setup is focused on WordPress development using Docker on Linux, but should
 * Docker
 * Docker Compose
 
-### Docker Containers used
+### Docker Images used
 
 * MariaDB https://hub.docker.com/_/mariadb/
 * Wordpress https://hub.docker.com/_/wordpress/
