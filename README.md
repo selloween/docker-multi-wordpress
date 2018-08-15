@@ -1,15 +1,11 @@
 # A simple Docker Setup for WordPress Development
 
-This setup is focused on WordPress development using Docker on Linux, but should work fine on MacOS or Windows.
-
-## Preface
-
-### Requirements
+## Requirements
 
 * Docker
 * Docker Compose
 
-### Docker Images used
+## Docker Images included
 
 * MariaDB https://hub.docker.com/_/mariadb/
 * Wordpress https://hub.docker.com/_/wordpress/
