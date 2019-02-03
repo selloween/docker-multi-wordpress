@@ -24,7 +24,7 @@ rename it to `.env`. Each site directory must contain this environment file.
 * Make optional changes to `wp-config.php`
 * The `wp-content` folder is mounted locally to `/srv/www/${VIRTUAL_HOST}/wp_content` for
 persistency. This folder contains themes, plugins and uploads.
-* Database files are mounted here: `/srv/www/${VIRTUAL_HOST}/db_data
+* Database files are mounted here: `/srv/www/${VIRTUAL_HOST}/db_data`
 
 ## Custom Theme & Plugin Development
 * You can develop a custom theme in `wordpress_XX/theme` or a custom plugin in
