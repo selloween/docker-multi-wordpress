@@ -35,7 +35,7 @@ services:
       VIRTUAL_PORT: $VIRTUAL_PORT
       LETSENCRYPT_HOST: $VIRTUAL_HOST
       LETSENCRYPT_EMAIL: $LETSENCRYPT_EMAIL
-      LETSENCRYPT_TEST: 'true'
+      #LETSENCRYPT_TEST: 'true'
 
   cp:
     build: composer
