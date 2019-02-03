@@ -1,59 +1,37 @@
-# A simple Docker Setup for WordPress Development
+# Run multiple WordPress Docker containers with NGINX Proxy, LetsEncrypt and PHP Composer
 
 ## Requirements
 
 * Docker
 * Docker Compose
 
-## Docker Base Images
+## NGINX Proxy and LetsEncrypt
 
-* MariaDB https://hub.docker.com/_/mariadb/
-* Wordpress https://hub.docker.com/_/wordpress/
-* Composer https://hub.docker.com/_/composer/
+Run `docker-compose up -d` in the `nginx` directory to start the NGINX Proxy and LetsEncrypt Proxy
+Companion containers. These containers will handle https.  
 
-## Project Structure
+## WordPress Setup
 
-```
-/configs
-    /composer
-        composer.json
-        Dockerfile
-    /wordpress
-        Dockerfile
-        wp-config.php
-/plugin
-    index.php
-/theme
-    index.php
-    style.css
-.env
-.gitignore
-docker-compose.yml
-```
+* Copy the `wordpress_01` directory for each WordPress site you want to host. I created a copy called `wordpress_02` as an example. If you only want to host one site you can delete `wordpress_02` and modify `wordpress_01` to your liking.
 
-## Environment variables
+* In each site directory is a `sample.env` - copy that file, edit the environment variables and
+rename it to `.env`. Each site directory must contain this environment file.
+* Make sure that the container names  are unique for each each site. (`DB_CONTAINER WP_CONTAINER COMPOSER_CONTAINER`). 
+* I recommend choosing different database credentials for each site.
+* Make optional changes to `wp-config.php`
+* The `wp-content` folder is mounted locally to `/srv/www/${VIRTUAL_HOST}/wp_content` for
+persistency. This folder contains themes, plugins and uploads.
+* Database files are mounted here: `/srv/www/${VIRTUAL_HOST}/db_data
 
-Change the enviroment variables in the .env file to suit your project.
-See an example below:
-```
-COMPOSE_PROJECT_NAME=my-awesome-project
-DB_NAME=wp-database
-DB_USER=wp-user
-DB_PASSWORD=db-password
-DB_HOST=db
-WP_TABLE_PREFIX=wp_
-DB_CONTAINER=db-container
-WP_CONTAINER=wp-container
-COMPOSER_CONTAINER=composer-container
-THEME_NAME=my-awesome-theme
-PLUGIN_NAME=my-awesome-plguin
-```
+## Custom Theme & Plugin Development
+* You can develop a custom theme in `wordpress_XX/theme` or a custom plugin in
+* `wordpress_XX/plugin`. Theme and plugin are named after the according environment variable defined in `.env` (`WP_THEME` and `WP_PLUGIN`)
+
 
 ## Composer
 
-Add plugins and/or theme dependencies to ``config/composer/composer.json``
-They will be installed by the composer container on ``docker-compose up --build``
-I've added common plugins from https://wpackagist.org/ repository as an example.
+Add plugins and/or theme dependencies to `wordpress_XX/composer/composer.json`
+They will be installed by the composer container on `docker-compose up --build` I've added common plugins from https://wpackagist.org/ repository as an example.
 
 ```
 {
@@ -72,29 +50,8 @@ I've added common plugins from https://wpackagist.org/ repository as an example.
 }
 ```
 
-## Theme/Plugin location
+## Build and run containers. 
 
-Place your theme/plugin files in the theme/plugin folder. The corresponding theme/plugin folder in the container will be renamed to the name you specified in ``.env`` file.
-
-## Additonal configuration
-
-### Custom wp-config.php
-
-You can add customizations to ``./config/wordpress/wp-config.php``.
-Note: You don't have to add database credentials as this is done by the WordPress Docker image automatically!
-
-Note: You have to run ``docker-compose up`` adding the ``--build`` flag to make wp-config changes take effect.
-
-## Persistent Data
-
-volumes are located on Linux hosts under the default location 
-``/var/lib/docker/volumes``
-
-``wp_content`` contains all files from ``wp-content``
-including uploads etc.
-
-``db_data`` contains database data, so that data won't get lost if the database container gets removed.
-
-## Run Project
+For each site navigate to its directory and:
 
 ``docker-compose up --build``
