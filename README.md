@@ -5,7 +5,7 @@
 * Docker
 * Docker Compose
 
-## Docker Images included
+## Docker Base Images
 
 * MariaDB https://hub.docker.com/_/mariadb/
 * Wordpress https://hub.docker.com/_/wordpress/
