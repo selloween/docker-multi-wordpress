@@ -35,7 +35,7 @@ persistency. This folder contains themes, plugins and uploads.
 Add plugins and/or theme dependencies to `wordpress_XX/composer/composer.json`
 They will be installed by the composer container on `docker-compose up --build` I've added common plugins from https://wpackagist.org/ repository as an example.
 
-```
+``` arbitrary
 {
     "name": "wordpress-docker-composer",
     "description": "WordPress Docker & Composer Setup",
@@ -60,4 +60,4 @@ For each site navigate to its directory and:
 
 ## Local Development
 
-For local development set the values of `VIRTUAL_HOST`and `LETSENCRYPT_HOST` environment variables to a abitrary, fictional domain. (e.g. my-wordpress.com) and set `LETSENCRYPT_TEST` to `true`. Make sure to use a valid domain ending and to add the domain to your hosts file. On Linux or MacOS add this line `127.0.0.1    my-wordpress.com` to `/etc/hosts` and restart the browser. On Windows the host file is located here - `C:\Windows\System32\drivers\etc\hosts`
+For local development set the values of `VIRTUAL_HOST`and `LETSENCRYPT_HOST` environment variables to a arbitrary, fictional domain. (e.g. my-wordpress.com) and set `LETSENCRYPT_TEST` to `true`. Make sure to use a valid domain ending and to add the domain to your hosts file. On Linux or MacOS add this line `127.0.0.1    my-wordpress.com` to `/etc/hosts` and restart the browser. On Windows the host file is located here - `C:\Windows\System32\drivers\etc\hosts`
