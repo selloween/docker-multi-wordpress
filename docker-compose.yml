@@ -17,7 +17,7 @@ services:
 
   wordpress:
     container_name: ${WP_CONTAINER}
-    build: "./config/wordpress"
+    build: wordpress
     depends_on:
       - db
       - composer
@@ -38,8 +38,7 @@ services:
       WORDPRESS_TABLE_PREFIX: ${WP_TABLE_PREFIX}
 
   composer:
-    build: "./config/composer"
-    image: composer
+    build: composer
     container_name: ${COMPOSER_CONTAINER}
     volumes:
       - wp_content:/app/wp-content
