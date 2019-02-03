@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  nginx:
+    image: jwilder/nginx-proxy:alpine
+    container_name: nginx
+    restart: always
+    labels:
+      com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: 'true'
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /srv/nginx/data/certs:/etc/nginx/certs:ro
+      - /srv/nginx/data/conf.d:/etc/nginx/conf.d
+      - /srv/nginx/data/vhost.d:/etc/nginx/vhost.d
+      - /srv/nginx/data/html:/usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    networks:
+      - proxy
+      
+  letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: letsencrypt
+    volumes:
+      - /srv/nginx/data/vhost.d:/etc/nginx/vhost.d
+      - /srv/nginx/data/certs:/etc/nginx/certs:rw
+      - /srv/nginx/data/html:/usr/share/nginx/html
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    depends_on:
+      - nginx
+    networks:
+      - proxy
+    
+networks:
+  proxy:
+    driver: bridge

@@ -1,0 +1,3 @@
+/*
+Plugin Name: Custom Plugin
+*/

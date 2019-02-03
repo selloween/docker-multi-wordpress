@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+
+  db:
+    container_name: $DB_CONTAINER
+    image: mariadb:latest
+    restart: always
+    volumes:
+      - /srv/www/${VIRTUAL_HOST}/db_data:/var/lib/mysql
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
+      MYSQL_DATABASE: $DB_NAME
+      MYSQL_USER: $DB_USER
+      MYSQL_PASSWORD: $DB_PASSWORD
+
+  wp:
+    container_name: $WP_CONTAINER
+    build: .
+    depends_on:
+      - db
+      - cp
+    restart: always
+    volumes:
+      - ./theme:/var/www/html/wp-content/themes/${WP_THEME}:rw
+      - ./plugin:/var/www/html/wp-content/plugins/${WP_PLUGIN}:rw
+      - /srv/www/${VIRTUAL_HOST}/wp_content:/var/www/html/wp-content:rw
+    environment:
+      WORDPRESS_DB_HOST: $DB_CONTAINER
+      WORDPRESS_DB_NAME: $DB_NAME
+      WORDPRESS_DB_USER: $DB_USER
+      WORDPRESS_DB_PASSWORD: $DB_PASSWORD
+      WORDPRESS_TABLE_PREFIX: $WP_TABLE_PREFIX
+      VIRTUAL_HOST: $VIRTUAL_HOST
+      VIRTUAL_PORT: $VIRTUAL_PORT
+      LETSENCRYPT_HOST: $VIRTUAL_HOST
+      LETSENCRYPT_EMAIL: $LETSENCRYPT_EMAIL
+      LETSENCRYPT_TEST: 'true'
+
+  cp:
+    build: composer
+    container_name: ${COMPOSER_CONTAINER}
+    volumes:
+      - /srv/www/${VIRTUAL_HOST}/wp_content:/app/wp-content
+    command: composer install
+
+networks:
+  default:
+    external:
+      name: nginx_proxy
+
