@@ -1,6 +1,6 @@
 # Run multiple WordPress Docker containers with NGINX Proxy, LetsEncrypt and PHP Composer
 
-Each WordPress site runs in its own container and is proxied by an NGINX Proxy that handles SSL thanks to LetsEncrypt.
+Each WordPress site runs its own container and is proxied by an NGINX Proxy that handles SSL thanks to LetsEncrypt.
 This setup relies on https://github.com/jwilder/nginx-proxy and https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion
 
 ## Requirements
@@ -19,8 +19,8 @@ Companion containers. These containers will handle https.
 
 * In each site directory is a `sample.env` - copy that file, edit the environment variables and
 rename it to `.env`. Each site directory must contain this environment file.
-* Make sure that the container names  are unique for each each site. (`DB_CONTAINER WP_CONTAINER COMPOSER_CONTAINER`). 
-* I recommend choosing different database credentials for each site.
+* Make sure that the container names  are unique for each site. (`DB_CONTAINER, WP_CONTAINER and COMPOSER_CONTAINER`). 
+* I recommend highly choosing different database credentials for each site.
 * Make optional changes to `wp-config.php`
 * The `wp-content` folder is mounted locally to `/srv/www/${VIRTUAL_HOST}/wp_content` for
 persistency. This folder contains themes, plugins and uploads.
@@ -28,7 +28,7 @@ persistency. This folder contains themes, plugins and uploads.
 
 ## Custom Theme & Plugin Development
 * You can develop a custom theme in `wordpress_XX/theme` or a custom plugin in
-* `wordpress_XX/plugin`. Theme and plugin are named after the according environment variable defined in `.env` (`WP_THEME` and `WP_PLUGIN`)
+`wordpress_XX/plugin`. Theme and plugin are named after the according environment variable defined in `.env` (`WP_THEME` and `WP_PLUGIN`)
 
 ## Composer
 
@@ -44,7 +44,7 @@ They will be installed by the composer container on `docker-compose up --build` 
             "type":"composer",
             "url":"https://wpackagist.org"
         }
-    ],
+    ],, fictiona
     "require": {
         "wpackagist-plugin/wordpress-seo":"*",
         "wpackagist-plugin/wp-super-cache":"*"
@@ -60,4 +60,4 @@ For each site navigate to its directory and:
 
 ## Local Development
 
-For local development set the values of `VIRTUAL_HOST`and `LETSENCRYPT_HOST` environment variables to a arbitrary, fictional domain. (e.g. my-wordpress.com) and set `LETSENCRYPT_TEST` to `true`. Make sure to use a valid domain ending and to add the domain to your hosts file. On Linux or MacOS add this line `127.0.0.1    my-wordpress.com` to `/etc/hosts` and restart the browser. On Windows the host file is located here - `C:\Windows\System32\drivers\etc\hosts`
+For local development set the values of `VIRTUAL_HOST`and `LETSENCRYPT_HOST` environment variables to a arbitrary domain. (e.g. my-wordpress.com) and set `LETSENCRYPT_TEST` to `true`. Make sure to use a valid domain ending and to add the domain to your hosts file. On Linux or MacOS add this line `127.0.0.1    my-wordpress.com` to `/etc/hosts` and restart the browser. On Windows the hosts file is located here - `C:\Windows\System32\drivers\etc\hosts`
