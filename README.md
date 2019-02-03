@@ -1,5 +1,8 @@
 # Run multiple WordPress Docker containers with NGINX Proxy, LetsEncrypt and PHP Composer
 
+Each WordPress site runs in its own container and is proxied by an NGINX Proxy that handles SSL thanks to LetsEncrypt.
+This setup relies on https://github.com/jwilder/nginx-proxy and https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion
+
 ## Requirements
 
 * Docker
@@ -26,7 +29,6 @@ persistency. This folder contains themes, plugins and uploads.
 ## Custom Theme & Plugin Development
 * You can develop a custom theme in `wordpress_XX/theme` or a custom plugin in
 * `wordpress_XX/plugin`. Theme and plugin are named after the according environment variable defined in `.env` (`WP_THEME` and `WP_PLUGIN`)
-
 
 ## Composer
 
