@@ -44,7 +44,7 @@ They will be installed by the composer container on `docker-compose up --build` 
             "type":"composer",
             "url":"https://wpackagist.org"
         }
-    ],, fictiona
+    ],
     "require": {
         "wpackagist-plugin/wordpress-seo":"*",
         "wpackagist-plugin/wp-super-cache":"*"
