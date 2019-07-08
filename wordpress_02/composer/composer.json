@@ -1,6 +1,4 @@
 {
-    "name": "wordpress-docker-composer",
-    "description": "WordPress Docker & Composer Setup",
     "repositories":[
         {
             "type":"composer",
